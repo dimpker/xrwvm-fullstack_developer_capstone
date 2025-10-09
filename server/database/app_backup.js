@@ -16,7 +16,7 @@ console.log(`Loaded ${reviews_data.reviews.length} reviews from JSON file`);
 
 // Express route to home
 app.get('/', async (req, res) => {
-    res.send("Welcome to the Dealership API - JSON Mode")
+    res.send("Welcome to the Dealership API - JSON Mode");
 });
 
 // Express route to fetch all reviews
@@ -112,5 +112,5 @@ app.post('/insert_review', express.raw({ type: 'application/json' }), async (req
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`)
+    console.log(`Server is running on http://localhost:${port}`);
 });

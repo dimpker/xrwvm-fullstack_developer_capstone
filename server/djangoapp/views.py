@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 def login_user(request):
     if request.method != 'POST':
         return JsonResponse({"status": "Failed", "error": "Method not allowed"}, status=405)
-    
+
     try:
         # Get username and password from request.POST dictionary
         data = json.loads(request.body)
@@ -57,7 +57,7 @@ def logout_request(request):
 def registration(request):
     if request.method != 'POST':
         return JsonResponse({"status": "Failed", "error": "Method not allowed"}, status=405)
-    
+
     try:
         context = {}
 
@@ -100,17 +100,17 @@ def get_cars(request):
         print("Calling initiate() to populate data...")
         initiate()
         print("Initiate() completed")
-    
+
     car_models = CarModel.objects.select_related('car_make')
     print(f"CarModel count: {car_models.count()}")
-    
+
     cars = []
     for car_model in car_models:
         cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
-    
+
     print(f"Returning {len(cars)} cars")
     return JsonResponse({"CarModels":cars})
-    
+
 # Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
     if(state == "All"):
@@ -166,7 +166,7 @@ def dealers_table_view(request):
         # Get all dealers from the backend API
         endpoint = "/fetchDealers"
         dealers = get_request(endpoint)
-        
+
         context = {
             'dealers': dealers,
             'title': 'Dealership Directory',
@@ -188,10 +188,10 @@ def add_review_form_view(request):
     """
     if not request.user.is_authenticated:
         return redirect('/login/')
-    
+
     dealer_id = request.GET.get('dealer_id')
     dealer_name = request.GET.get('dealer_name', 'Unknown Dealer')
-    
+
     if request.method == 'POST':
         # Handle form submission
         try:
@@ -205,14 +205,14 @@ def add_review_form_view(request):
                 'car_model': request.POST.get('car_model'),
                 'car_year': request.POST.get('car_year')
             }
-            
+
             response = post_review(review_data)
             messages.success(request, 'Review submitted successfully!')
             return redirect('/dealers/')
-            
+
         except Exception as e:
             messages.error(request, f'Error submitting review: {str(e)}')
-    
+
     context = {
         'dealer_id': dealer_id,
         'dealer_name': dealer_name,
