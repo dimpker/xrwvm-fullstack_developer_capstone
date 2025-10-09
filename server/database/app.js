@@ -1,10 +1,10 @@
 const express = require('express');
 const fs = require('fs');
-const cors = require('cors')
-const app = express()
+const cors = require('cors');
+const app = express();
 const port = 3030;
 
-app.use(cors())
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -16,7 +16,7 @@ console.log(`Loaded ${reviews_data.reviews.length} reviews from JSON file`);
 
 // Express route to home
 app.get('/', async (req, res) => {
-    res.send("Welcome to the Dealership API - JSON Mode")
+    res.send("Welcome to the Dealership API - JSON Mode");
 });
 
 // Express route to fetch all reviews
