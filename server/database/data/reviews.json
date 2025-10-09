@@ -549,6 +549,28 @@
       "car_make": "Cadillac",
       "car_model": "DeVille",
       "car_year": 1995
+    },
+    {
+      "id": 51,
+      "name": "Test User",
+      "dealership": 1,
+      "review": "This is a test review with great service!",
+      "purchase": true,
+      "purchase_date": "2023-10-01",
+      "car_make": "NISSAN",
+      "car_model": "Pathfinder",
+      "car_year": 2022
+    },
+    {
+      "id": 52,
+      "name": "yourmama",
+      "dealership": 1,
+      "review": "Best dealer!",
+      "purchase": true,
+      "purchase_date": "2025-10-16",
+      "car_make": "Mercedes",
+      "car_model": "C-Class",
+      "car_year": 2020
     }
   ]
 }

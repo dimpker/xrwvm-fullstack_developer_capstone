@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        /* Bootstrap and custom styles */
+        .navbar {
+            background-color: darkturquoise !important;
+            height: 1in;
+        }
+        .username {
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .nav_item {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            background-color: rgba(0,0,0,0.1);
+        }
+        .nav_item:hover {
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+        .input_panel {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        /* Filter Section */
+        .filters {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .filter-group label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .filter-select {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: white;
+            min-width: 150px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: #1e7e34;
+        }
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 0.875rem;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .dealer-id {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .error {
+            color: #dc3545;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8d7da;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .no-dealers {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #6c757d;
+        }
+        .actions-cell {
+            white-space: nowrap;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .navbar-nav {
+                gap: 1rem;
+            }
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .table-container {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height:1in;">
+        <div class="container-fluid">
+            <h2 style="padding-right: 5%; color: white; margin: 0;">Dealerships</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="font-size: larger; color: white;" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger; color: white;" href="/about/">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger; color: white;" href="/contact/">Contact Us</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <div class="loginlink" id="loginlogout">
+                        {% if user.is_authenticated %}
+                            <div class="input_panel">
+                                <span class="username">{{ user.first_name|default:user.username }}</span>
+                                <a class="nav_item" href="/djangoapp/logout/" onclick="logout(event)">Logout</a>
+                            </div>
+                        {% else %}
+                            <div class="input_panel">
+                                <a class="nav_item" href="/login/">Login</a>
+                                <span style="color: white; margin: 0 10px;">|</span>
+                                <a class="nav_item" href="/register/">Register</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1>{{ title }}</h1>
+            
+            <!-- Filters Section -->
+            <div class="filters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="stateFilter">Filter by State:</label>
+                        <select id="stateFilter" class="filter-select" onchange="filterByState()">
+                            <option value="">All States</option>
+                        </select>
+                    </div>
+                    <button onclick="clearFilters()" class="btn btn-primary btn-sm">Clear Filters</button>
+                </div>
+            </div>
+            
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+            
+            {% if dealers %}
+                <div class="stats">
+                    <div>
+                        <span id="dealerCount">Showing {{ dealers|length }} dealership{{ dealers|length|pluralize }}</span>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <div>
+                            <button onclick="showAddReviewModal()" class="btn btn-success">Add Review</button>
+                        </div>
+                    {% endif %}
+                </div>
+            
+            <div class="table-container">
+                <table id="dealersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Dealership Name</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Address</th>
+                            <th>ZIP Code</th>
+                            <th>Coordinates</th>
+                            {% if user.is_authenticated %}
+                                <th>Actions</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dealer in dealers %}
+                        <tr data-state="{{ dealer.state }}">
+                            <td class="dealer-id">{{ dealer.id }}</td>
+                            <td>
+                                <strong>{{ dealer.full_name }}</strong><br>
+                                <small style="color: #6c757d;">{{ dealer.short_name }}</small>
+                            </td>
+                            <td>{{ dealer.city }}</td>
+                            <td>{{ dealer.state }}</td>
+                            <td>{{ dealer.address }}</td>
+                            <td>{{ dealer.zip }}</td>
+                            <td>
+                                <small>{{ dealer.lat }}, {{ dealer.long }}</small>
+                            </td>
+                            {% if user.is_authenticated %}
+                                <td class="actions-cell">
+                                    <button onclick="addReview({{ dealer.id }}, '{{ dealer.full_name|escapejs }}')" class="btn btn-success btn-sm">
+                                        Add Review
+                                    </button>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="no-dealers">
+                <h3>No dealerships found</h3>
+                <p>Please check your connection and try again.</p>
+            </div>
+        {% endif %}
+        
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <a href="/" style="color: #007bff; text-decoration: none;">← Back to Home</a>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Populate state filter options
+        function populateStateFilter() {
+            const stateFilter = document.getElementById('stateFilter');
+            const table = document.getElementById('dealersTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            const states = new Set();
+            
+            // Collect all unique states
+            for (let i = 0; i < rows.length; i++) {
+                const state = rows[i].getAttribute('data-state');
+                if (state) {
+                    states.add(state);
+                }
+            }
+            
+            // Sort states alphabetically
+            const sortedStates = Array.from(states).sort();
+            
+            // Add options to select
+            sortedStates.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateFilter.appendChild(option);
+            });
+        }
+        
+        // Filter dealers by state
+        function filterByState() {
+            const stateFilter = document.getElementById('stateFilter');
+            const selectedState = stateFilter.value;
+            const table = document.getElementById('dealersTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            let visibleCount = 0;
+            
+            for (let i = 0; i < rows.length; i++) {
+                const rowState = rows[i].getAttribute('data-state');
+                if (!selectedState || rowState === selectedState) {
+                    rows[i].style.display = '';
+                    visibleCount++;
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+            
+            // Update counter
+            updateDealerCount(visibleCount);
+        }
+        
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('stateFilter').value = '';
+            filterByState();
+        }
+        
+        // Update dealer count display
+        function updateDealerCount(count) {
+            const dealerCount = document.getElementById('dealerCount');
+            const plural = count === 1 ? '' : 's';
+            dealerCount.textContent = `Showing ${count} dealership${plural}`;
+        }
+        
+        // Add review for specific dealer
+        function addReview(dealerId, dealerName) {
+            const confirmed = confirm(`Add a review for ${dealerName}?`);
+            if (confirmed) {
+                // Redirect to add review page
+                window.location.href = `/djangoapp/add_review_form?dealer_id=${dealerId}&dealer_name=${encodeURIComponent(dealerName)}`;
+            }
+        }
+        
+        // Show add review modal (general)
+        function showAddReviewModal() {
+            alert('Please select a specific dealership to add a review by clicking the "Add Review" button next to the dealer.');
+        }
+        
+        // Logout function (matching original functionality)
+        async function logout(e) {
+            e.preventDefault();
+            let logout_url = window.location.origin + "/djangoapp/logout";
+            try {
+                const res = await fetch(logout_url, {
+                    method: "GET",
+                });
+                const json = await res.json();
+                if (json) {
+                    let username = sessionStorage.getItem('username') || '{{ user.username }}';
+                    sessionStorage.removeItem('username');
+                    window.location.href = window.location.origin;
+                    window.location.reload();
+                    alert("Logging out " + username + "...");
+                } else {
+                    alert("The user could not be logged out.");
+                }
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = "/djangoapp/logout/";
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateStateFilter();
+        });
+    </script>
+</body>
+</html>

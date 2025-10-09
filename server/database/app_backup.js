@@ -80,10 +80,9 @@ app.get('/fetchDealer/:id', async (req, res) => {
 });
 
 // Express route to insert review
-app.post('/insert_review', async (req, res) => {
+app.post('/insert_review', express.raw({ type: 'application/json' }), async (req, res) => {
   try {
-    console.log("Raw request body:", req.body);
-    const data = req.body;
+    const data = JSON.parse(req.body);
     const lastReview = reviews_data.reviews[reviews_data.reviews.length - 1];
     const newId = lastReview ? lastReview.id + 1 : 1;
     
@@ -104,8 +103,7 @@ app.post('/insert_review', async (req, res) => {
     // Write back to file (in a real app, you'd use a proper database)
     fs.writeFileSync("data/reviews.json", JSON.stringify(reviews_data, null, 2));
     
-    console.log(`Added new review with ID: ${newId} for dealer: ${data.dealership}`);
-    console.log(`Review: "${data.review}"`);
+    console.log(`Added new review with ID: ${newId}`);
     res.json({ message: "Review added successfully", id: newId });
   } catch (error) {
     console.error('Error adding review:', error);

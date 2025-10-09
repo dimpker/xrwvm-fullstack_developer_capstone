@@ -136,8 +136,73 @@ def add_review(request):
         data = json.loads(request.body)
         try:
             response = post_review(data)
-            return JsonResponse({"status": 200})
-        except:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            print(f"Review posted successfully: {response}")
+            return JsonResponse({"status": 200, "message": "Review added successfully"})
+        except Exception as e:
+            print(f"Error posting review: {str(e)}")
+            return JsonResponse({"status": 401, "message": f"Error in posting review: {str(e)}"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
+
+def dealers_table_view(request):
+    """
+    Render dealers in a table format
+    """
+    try:
+        # Get all dealers from the backend API
+        endpoint = "/fetchDealers"
+        dealers = get_request(endpoint)
+        
+        context = {
+            'dealers': dealers,
+            'title': 'Dealership Directory',
+            'user': request.user
+        }
+        return render(request, 'dealers_table.html', context)
+    except Exception as e:
+        context = {
+            'error': f"Error loading dealers: {str(e)}",
+            'dealers': [],
+            'title': 'Dealership Directory',
+            'user': request.user
+        }
+        return render(request, 'dealers_table.html', context)
+
+def add_review_form_view(request):
+    """
+    Display add review form
+    """
+    if not request.user.is_authenticated:
+        return redirect('/login/')
+    
+    dealer_id = request.GET.get('dealer_id')
+    dealer_name = request.GET.get('dealer_name', 'Unknown Dealer')
+    
+    if request.method == 'POST':
+        # Handle form submission
+        try:
+            review_data = {
+                'dealership': int(dealer_id),
+                'name': f"{request.user.first_name} {request.user.last_name}".strip() or request.user.username,
+                'review': request.POST.get('review'),
+                'purchase': request.POST.get('purchase') == 'on',
+                'purchase_date': request.POST.get('purchase_date'),
+                'car_make': request.POST.get('car_make'),
+                'car_model': request.POST.get('car_model'),
+                'car_year': request.POST.get('car_year')
+            }
+            
+            response = post_review(review_data)
+            messages.success(request, 'Review submitted successfully!')
+            return redirect('/dealers/')
+            
+        except Exception as e:
+            messages.error(request, f'Error submitting review: {str(e)}')
+    
+    context = {
+        'dealer_id': dealer_id,
+        'dealer_name': dealer_name,
+        'title': f'Add Review for {dealer_name}',
+        'user': request.user
+    }
+    return render(request, 'add_review_form.html', context)

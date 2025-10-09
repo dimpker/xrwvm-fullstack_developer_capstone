@@ -31,8 +31,8 @@ const Dealer = () => {
     const retobj = await res.json();
     
     if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
+      // retobj.dealer is already a single object, not an array
+      setDealer(retobj.dealer)
     }
   }
 
@@ -61,9 +61,21 @@ const Dealer = () => {
     get_reviews();
     if(sessionStorage.getItem("username")) {
       setPostReview(<a href={post_review}><img src={review_icon} style={{width:'10%',marginLeft:'10px',marginTop:'10px'}} alt='Post Review'/></a>)
-
-      
     }
+    
+    // Listen for page visibility changes to refresh reviews when user returns from PostReview
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        console.log("Page became visible, refreshing reviews...");
+        get_reviews();
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   },[]);  
 
 
