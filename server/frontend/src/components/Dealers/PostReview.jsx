@@ -108,6 +108,7 @@ const PostReview = () => {
   useEffect(() => {
     get_dealer();
     get_cars();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
 
