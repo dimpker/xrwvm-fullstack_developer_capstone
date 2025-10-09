@@ -59,7 +59,7 @@ const Register = () => {
 
       const json = await res.json();
       
-      if (json.status) {
+      if (json.status === "Authenticated") {
         // Save username in session and reload home
         sessionStorage.setItem('username', json.userName);
         alert("Registration successful! Welcome " + json.userName);
@@ -73,6 +73,9 @@ const Register = () => {
         setEmail("");
         setFirstName("");
         setlastName("");
+      }
+      else {
+        alert(json.error || "Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("Registration error:", error);
