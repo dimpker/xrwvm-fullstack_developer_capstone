@@ -1,0 +1,8 @@
+{
+  "name": "car-dealership-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd server/frontend && npm install && npm run build && cp -r server/frontend/build/* .",
+    "vercel-build": "cd server/frontend && npm install && npm run build"
+  }
+}

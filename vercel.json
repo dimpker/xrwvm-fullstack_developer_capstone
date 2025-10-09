@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "name": "car-dealership-app",
   "builds": [
     {
       "src": "server/frontend/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
+      "config": { 
+        "distDir": "build"
+      }
     }
   ],
   "routes": [
