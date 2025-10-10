@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from textblob import TextBlob
 import re
+import os
 
 app = Flask(__name__)
 
@@ -75,5 +76,6 @@ def health_check():
 
 
 if __name__ == '__main__':
-    print("Starting Sentiment Analysis Service on http://localhost:5050")
-    app.run(host='0.0.0.0', port=5050, debug=True)
+    port = int(os.environ.get('PORT', 5050))
+    print(f"Starting Sentiment Analysis Service on port {port}")
+    app.run(host='0.0.0.0', port=port, debug=True)
