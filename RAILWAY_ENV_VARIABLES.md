@@ -5,14 +5,24 @@
 ### Copy these exact values to your Railway Django service:
 
 ```
-DJANGO_ALLOWED_HOSTS=djangobackend-production-dd54.up.railway.app,capstone-project-8rqfqv6j5-andidollars-projects.vercel.app
+DJANGO_ALLOWED_HOSTS=djangobackend-production-dd54.up.railway.app,capstone-project-2wqmtjw4o-andidollars-projects.vercel.app
 
-DJANGO_CSRF_TRUSTED_ORIGINS=https://djangobackend-production-dd54.up.railway.app,https://capstone-project-8rqfqv6j5-andidollars-projects.vercel.app
+DJANGO_CSRF_TRUSTED_ORIGINS=https://djangobackend-production-dd54.up.railway.app,https://capstone-project-2wqmtjw4o-andidollars-projects.vercel.app
 
 backend_url=https://nodedatabase-production.up.railway.app
 
 sentiment_analyzer_url=https://flasksentiment-production.up.railway.app/
 ```
+
+**IMPORTANT**: If Vercel generates a new URL, you must update both environment variables above!
+
+**Alternative (Wildcard) - Accepts any Vercel subdomain:**
+```
+DJANGO_ALLOWED_HOSTS=djangobackend-production-dd54.up.railway.app,.vercel.app
+
+DJANGO_CSRF_TRUSTED_ORIGINS=https://djangobackend-production-dd54.up.railway.app,https://*.vercel.app
+```
+⚠️ Note: Wildcard CSRF origins might not work in all Django versions. Use specific domains if issues occur.
 
 ## Important Notes:
 
