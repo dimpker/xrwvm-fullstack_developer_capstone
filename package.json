@@ -1,7 +1,11 @@
 {
   "name": "car-dealership-fullstack",
   "version": "1.0.0",
+  "description": "Full-stack car dealership application",
   "scripts": {
-    "vercel-build": "cd server/frontend && npm install && npm run build && cd ../.. && mv server/frontend/build public"
+    "build": "cd server/frontend && npm install && npm run build"
+  },
+  "engines": {
+    "node": ">=18.x"
   }
 }
