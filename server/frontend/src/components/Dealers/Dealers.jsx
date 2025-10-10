@@ -3,6 +3,7 @@ import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
 import review_icon from "../assets/reviewicon.png"
+import { BACKEND_URL } from '../../config';
 
 const Dealers = () => {
   const [dealersList, setDealersList] = useState([]);
@@ -10,9 +11,9 @@ const Dealers = () => {
   let [states, setStates] = useState([])
 
   // let root_url = window.location.origin
-  let dealer_url ="/djangoapp/get_dealers";
+  let dealer_url = BACKEND_URL + "/djangoapp/get_dealers";
   
-  let dealer_url_by_state = "/djangoapp/get_dealers/";
+  let dealer_url_by_state = BACKEND_URL + "/djangoapp/get_dealers/";
  
   const filterDealers = async (state) => {
     dealer_url_by_state = dealer_url_by_state+state;

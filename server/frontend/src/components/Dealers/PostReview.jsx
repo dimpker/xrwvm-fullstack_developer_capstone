@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
+import { BACKEND_URL } from '../../config';
 
 
 const PostReview = () => {
@@ -13,13 +14,11 @@ const PostReview = () => {
   const [date, setDate] = useState("");
   const [carmodels, setCarmodels] = useState([]);
 
-  let curr_url = window.location.href;
-  let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
   let params = useParams();
   let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let review_url = root_url+`djangoapp/add_review`;
-  let carmodels_url = root_url+`djangoapp/get_cars`;
+  let dealer_url = BACKEND_URL + `/djangoapp/dealer/${id}`;
+  let review_url = BACKEND_URL + `/djangoapp/add_review`;
+  let carmodels_url = BACKEND_URL + `/djangoapp/get_cars`;
 
   const postreview = async ()=>{
     let name = sessionStorage.getItem("firstname")+" "+sessionStorage.getItem("lastname");

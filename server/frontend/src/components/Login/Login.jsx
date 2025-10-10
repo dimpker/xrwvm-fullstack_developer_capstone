@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import "./Login.css";
 import Header from '../Header/Header';
+import { BACKEND_URL } from '../../config';
 
 const Login = ({ onClose }) => {
 
@@ -9,7 +10,7 @@ const Login = ({ onClose }) => {
   const [password, setPassword] = useState("");
   const [open,setOpen] = useState(true)
 
-  let login_url = window.location.origin+"/djangoapp/login";
+  let login_url = BACKEND_URL + "/djangoapp/login";
 
   const login = async (e) => {
     e.preventDefault();

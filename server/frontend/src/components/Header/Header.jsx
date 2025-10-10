@@ -1,11 +1,12 @@
 import React from 'react';
 import "../assets/style.css";
 import "../assets/bootstrap.min.css";
+import { BACKEND_URL } from '../../config';
 
 const Header = () => {
     const logout = async (e) => {
     e.preventDefault();
-    let logout_url = window.location.origin+"/djangoapp/logout";
+    let logout_url = BACKEND_URL + "/djangoapp/logout";
     const res = await fetch(logout_url, {
       method: "GET",
     });

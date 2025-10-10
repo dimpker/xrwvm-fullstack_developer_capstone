@@ -4,6 +4,7 @@ import user_icon from "../assets/person.png"
 import email_icon from "../assets/email.png"
 import password_icon from "../assets/password.png"
 import close_icon from "../assets/close.png"
+import { BACKEND_URL } from '../../config';
 
 const Register = () => {
   // State variables for form inputs
@@ -39,7 +40,7 @@ const Register = () => {
 
     setIsLoading(true);
 
-    let register_url = window.location.origin + "/djangoapp/register";
+    let register_url = BACKEND_URL + "/djangoapp/register";
 
     try {
       // Send POST request to register endpoint
