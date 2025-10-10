@@ -582,6 +582,17 @@
       "car_make": "Toyota",
       "car_model": "Camry",
       "car_year": 2019
+    },
+    {
+      "id": 54,
+      "name": "heinz",
+      "dealership": 1,
+      "review": "BEst of the best",
+      "purchase": true,
+      "purchase_date": "2025-10-10",
+      "car_make": "Toyota",
+      "car_model": "Corolla",
+      "car_year": 2024
     }
   ]
 }
