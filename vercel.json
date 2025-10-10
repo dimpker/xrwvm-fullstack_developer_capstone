@@ -1,19 +1,6 @@
 {
-  "version": 2,
   "buildCommand": "cd server/frontend && npm install && npm run build",
   "outputDirectory": "server/frontend/build",
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "env": {
-    "CI": "false",
-    "GENERATE_SOURCEMAP": "false"
-  }
+  "cleanUrls": true,
+  "trailingSlash": false
 }
