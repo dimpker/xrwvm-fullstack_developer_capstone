@@ -11,7 +11,7 @@ const Dealers = () => {
   let [states, setStates] = useState([])
 
   // let root_url = window.location.origin
-  let dealer_url = BACKEND_URL + "/djangoapp/get_dealers";
+  let dealer_url = BACKEND_URL + "/djangoapp/get_dealers/";
   
   let dealer_url_by_state = BACKEND_URL + "/djangoapp/get_dealers/";
  
