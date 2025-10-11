@@ -26,29 +26,38 @@ const Dealer = () => {
   let post_review = root_url+`postreview/${id}`;
   
   const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      // retobj.dealer is already a single object, not an array
-      setDealer(retobj.dealer)
+    try {
+      const res = await fetch(dealer_url, {
+        method: "GET"
+      });
+      const retobj = await res.json();
+      
+      if(retobj.status === 200) {
+        // retobj.dealer is already a single object, not an array
+        setDealer(retobj.dealer)
+      }
+    } catch (error) {
+      console.error("Error fetching dealer:", error);
     }
   }
 
   const get_reviews = async ()=>{
-    const res = await fetch(reviews_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      if(retobj.reviews.length > 0){
-        setReviews(retobj.reviews)
-      } else {
-        setUnreviewed(true);
+    try {
+      const res = await fetch(reviews_url, {
+        method: "GET"
+      });
+      const retobj = await res.json();
+      
+      if(retobj.status === 200) {
+        if(retobj.reviews.length > 0){
+          setReviews(retobj.reviews)
+        } else {
+          setUnreviewed(true);
+        }
       }
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      setUnreviewed(true);
     }
   }
 
