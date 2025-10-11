@@ -113,6 +113,16 @@ app.post('/insert_review', async (req, res) => {
   }
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'healthy', 
+    service: 'dealer-database',
+    dealers: dealerships_data.dealerships.length,
+    reviews: reviews_data.reviews.length 
+  });
+});
+
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server is running on port ${port}`);
 });
