@@ -1,6 +1,5 @@
 {
-  "installCommand": "cd server/frontend && npm install",
-  "buildCommand": "cd server/frontend && CI=false npm run build",
+  "buildCommand": "cd server/frontend && npm install && CI=false npm run build",
   "outputDirectory": "server/frontend/build",
   "rewrites": [
     {
@@ -13,4 +12,3 @@
     "CI": "false"
   }
 }
-
