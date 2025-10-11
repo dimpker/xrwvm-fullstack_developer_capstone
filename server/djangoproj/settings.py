@@ -164,3 +164,13 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# Session and Cookie settings for cross-domain authentication
+SESSION_COOKIE_SECURE = True  # Only send cookie over HTTPS
+SESSION_COOKIE_SAMESITE = 'None'  # Allow cross-domain cookies
+SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access
+SESSION_COOKIE_DOMAIN = None  # Allow cookies from any domain
+
+CSRF_COOKIE_SECURE = True  # Only send CSRF cookie over HTTPS
+CSRF_COOKIE_SAMESITE = 'None'  # Allow cross-domain CSRF cookies
+CSRF_COOKIE_HTTPONLY = False  # JavaScript needs to read this for CSRF token

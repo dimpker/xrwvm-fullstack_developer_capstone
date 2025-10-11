@@ -162,10 +162,15 @@ def get_dealer_details(request, dealer_id):
 
 
 @csrf_exempt
+@csrf_exempt
 def add_review(request):
     """
     Add a review for a dealer - only authenticated users can post reviews
     """
+    print(f"User authenticated: {request.user.is_authenticated}")
+    print(f"User: {request.user}")
+    print(f"User is anonymous: {request.user.is_anonymous}")
+    
     if not request.user.is_anonymous:
         data = json.loads(request.body)
         try:

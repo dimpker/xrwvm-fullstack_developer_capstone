@@ -4,6 +4,7 @@ import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
 import { BACKEND_URL } from '../../config';
+import { getCSRFToken } from '../../utils/csrf';
 
 
 const PostReview = () => {
@@ -61,10 +62,12 @@ const PostReview = () => {
     });
 
     console.log(jsoninput);
+    const csrfToken = getCSRFToken();
     const res = await fetch(review_url, {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken || "",
       },
       credentials: 'include',
       body: jsoninput,
