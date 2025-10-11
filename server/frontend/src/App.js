@@ -20,6 +20,7 @@ function App() {
       <Route path="/register" element={<ErrorBoundary><Register /></ErrorBoundary>} />
       <Route path="/about" element={<ErrorBoundary><About /></ErrorBoundary>} />
       <Route path="/contact" element={<ErrorBoundary><Contact /></ErrorBoundary>} />
+      <Route path="*" element={<ErrorBoundary><div style={{padding: '20px'}}><h2>Page Not Found</h2><p>Current path: {window.location.pathname}</p><p>React Router is working</p></div></ErrorBoundary>} />
     </Routes>
   );
 }
